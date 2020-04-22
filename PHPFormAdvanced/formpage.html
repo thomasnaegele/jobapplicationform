@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="formstyle.css">
+    <link rel="stylesheet" type="text/css" href="formproject/jquery.datetimepicker.min.css">
+    <script src="formproject/jquery.js"></script>
+    <script src="formproject/jquery.datetimepicker.full.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body onload="checkSubmission();">
+<div class="testbox">
+    <form id="form" action="formproject/welcome.php" method="post" enctype="multipart/form-data">
+        <div class="banner">
+            <h1>Webformular</h1>
+        </div>
+        <div id="subsuccessmsg" class="item formbox" style="display: none">
+            <div class="name-item">
+                <h1 style="color: green; width: 60%; line-height: 110%">The form has been sent. You will receive an email from us soon.</h1>
+                <br><br><br>
+            </div>
+        </div>
+        <br>
+        <div id="subsuccessmsg2" class="item formbox" style="display: none">
+            <div class="name-item">
+                <h1 style="color: red; width: 60%; line-height: 110%">An error occurred while the form was being sent. Please make sure the form is valid.</h1>
+                <br><br><br><br><br>
+            </div>
+        </div>
+        <br>
+        <div class="question formbox">
+            <div class="question-answer">
+                <div>
+                    <input type="radio" value="Frau" id="radio_gender_1" name="gender" required/>
+                    <label for="radio_gender_1" class="radio"><span>Frau*</span></label>
+                </div>
+                <div>
+                    <input type="radio" value="Herr" id="radio_gender_2" name="gender" required/>
+                    <label for="radio_gender_2" class="radio" style="margin-left: 17.5%;"><span>Herr*</span></label>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="item formbox">
+            <div class="name-item">
+                <input type="text" id="firstname" name="firstname" placeholder="Vorname*" maxlength="20" required style="width: 20%" onchange="checkCharacters(this, '2')"/>
+                <input type="text" id="lastname" name="lastname" placeholder="Name*" maxlength="20" required style="width: 20%; position: absolute; margin-left: 27.7%" onchange="checkCharacters(this, '2')"/>
+            </div>
+        </div>
+        <div class="contact-item formbox">
+            <div class="item">
+                <input type="text" id="strasse" name="strasse" placeholder="Strasse*" maxlength="70" required style="width: 97.3%" onchange="checkCharacters(this, '1')"/>
+            </div>
+        </div>
+        <div class="item formbox">
+            <div class="city-item">
+                <input type="text" id="plz" name="plz" placeholder="PLZ*" required maxlength="4" style="width: 5%" onchange="checkCharacters(this, '3')"/>
+                <input type="text" id="ort" name="ort" placeholder="Ort*" required maxlength="35" style="width: 37.3%; margin-left: 4%" onchange="checkCharacters(this, '2')"/>
+            </div>
+        </div>
+        <div class="contact-item formbox">
+            <div class="item">
+                <input type="email" id="email" name="email" required maxlength="50" placeholder="E-Mail Adresse*"/>
+            </div>
+        </div>
+        <div class="contact-item formbox">
+            <div class="item">
+                <input type="text" id="phone" name="phone" required maxlength="10" placeholder="Mobiltelefon / Telefon*" onchange="checkCharacters(this, '3')"/>
+                <p>Bitte geben Sie Ihre Mobiltelefonnummer / Telefonnummer ohne Abstand ein, wie z.B. 0997770088
+                </p>
+            </div>
+        </div>
+        <div class="contact-item formbox">
+            <div class="item">
+                <input type="text" id="social" name="socialNr" required maxlength="16" placeholder="Sozialversicherungs-Nr.*" onchange="checkCharacters(this, '3')"/>
+                <p>Bitte oben Ihre Sozialversicherungs-Nr. eingeben. Beispiel: 756 1234 1234 12</p>
+            </div>
+        </div>
+        <div class="position-item formbox">
+            <div class="item">
+                <input id="datetime" name="bdate" required maxlength="8" placeholder="Geburtsdatum"/>
+                <i class="fa fa-calendar" style="position: absolute; margin-top: -4%"></i>
+                <p>Tag.Monat.Jahr</p>
+            </div>
+        </div>
+        <br>
+        <div class="item formbox">
+            <input type="file" name="passport" accept="image/jpeg, image/png" required style="width: 48%">
+            <i class="fas fa-paperclip" style="position: absolute; margin-right: 50%; margin-top: -2%"></i>
+            <p>Passport photo</p>
+        </div>
+        <br>
+        <div class="item formbox">
+            <input type="file" name="cv" accept="application/pdf" required style="width: 48%">
+            <i class="fas fa-paperclip" style="position: absolute; margin-right: 50%; margin-top: -2%"></i>
+            <p>CV</p>
+        </div>
+        <br>
+        <div class="item formbox">
+            <div class="item">
+                <h3 style="color: black"><strong>Bestätigung*</strong></h3>
+                <label for="disclaimer" id="disclaimer_text" style="font-weight: bold; display: block; padding-left: 15px; text-indent: -15px;"><input type="checkbox" id="disclaimer" required style="width: 13px; height: 13px; padding: 0; margin:0; vertical-align: bottom; position: relative; top: -5.5px; *overflow: hidden;">Ich bestätige, dass ich mit den Datenschutzbestimmungen einverstanden bin.</label>
+                <br><br>
+                <p style="width: 50%">Datenschutz: Die mit diesem Formular erhobenen Daten werden ausschliesslich verwendet, um Ihre Anmeldung zur Stellenvermittlung zu erfassen und den Kontakt mit Ihnen für die telefonische Einholung weiterer Angaben zu ermöglichen. Nach Abschluss der Anmeldung im Stellenvermittlungssystem wird dieses Formular gelöscht.</p>
+            </div>
+        </div>
+        <br>
+        <div class="item formbox">
+            <div class="item">
+                <p style="color: grey; font-size: 90%">* Pflichtfelder (müssen ausgefüllt werden)</p>
+            </div>
+        </div>
+        <br>
+        <div class="btn-block">
+            <div class="item" style="margin-right: 44.5%">
+                <button id="submitbutton" type="submit">Senden</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    jQuery('#datetime').datetimepicker({
+        defaultDate: null,
+        maxDate: $.now(),
+        format: 'd-m-y',
+        value: new Date()
+    });
+
+    function getUrlVars() {
+        let params = {};
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            params[key] = value;
+        });
+        return params;
+    }
+    function getUrlParam(parameter, defaultvalue){
+        let urlparameter = defaultvalue;
+        if(window.location.href.indexOf(parameter) > -1){
+            urlparameter = getUrlVars()[parameter];
+        }
+        return urlparameter;
+    }
+    function checkSubmission() {
+        let submissionState = getUrlParam('subsuccess', '0');
+        if (submissionState === '1') {
+            document.getElementById("subsuccessmsg").style.display = "block";
+        }
+        else if (submissionState === '2') {
+            document.getElementById("subsuccessmsg2").style.display = "block";
+        }
+    }
+    function checkCharacters(element, checkState) {
+        let chars;
+        if (checkState === '1') {
+            chars = /^[A-Za-z0-9ßäöüÄÖÜ ]+$/;
+        }
+        else if (checkState === '2') {
+            chars = /^[A-Za-zßäöüÄÖÜ ]+$/;
+        }
+        else {
+            chars = /^[0-9 ]+$/;
+        }
+
+        let text = element.value;
+        if (text.match(chars)) {
+            element.classList.remove("invalidInput");
+            document.getElementById("submitbutton").disabled = false;
+        } else {
+            element.classList.add("invalidInput");
+            document.getElementById("submitbutton").disabled = true;
+        }
+    }
+</script>
+</body>
+</html>
